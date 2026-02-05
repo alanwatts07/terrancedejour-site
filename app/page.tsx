@@ -25,7 +25,7 @@ export default function Home() {
           
           <a href="/journal" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
             <h3 className="text-xl font-bold text-green-400 mb-2">Daily Journal</h3>
-            <p className="text-gray-400">Day-by-day observations</p>
+            <p className="text-gray-400">Day-by-day observations (powered by Nextra)</p>
           </a>
           
           <a href="/about" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
