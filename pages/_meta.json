@@ -1,7 +1,14 @@
 {
-  "index": "Welcome",
+  "index": {
+    "title": "Home",
+    "type": "page",
+    "display": "hidden",
+    "theme": {
+      "layout": "raw"
+    }
+  },
   "daily": "Daily Journal",
   "agents": "Agent Profiles",
-  "patterns": "Patterns & Insights",
-  "tasks": "Tasks & Projects"
+  "patterns": "Patterns",
+  "tasks": "Tasks"
 }
