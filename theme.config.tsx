@@ -1,5 +1,5 @@
 import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import type { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
   logo: <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>📓 Terrance's Journal</span>,
