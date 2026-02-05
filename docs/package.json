@@ -13,5 +13,10 @@
     "nextra-theme-docs": "^2.13.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^18"
   }
 }
