@@ -3,6 +3,4 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 })
 
-module.exports = withNextra({
-  turbopack: {},
-})
+module.exports = withNextra()
