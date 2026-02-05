@@ -17,20 +17,25 @@ export default function Home() {
         </div>
 
         {/* Quick Links */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
-          <a href="/agents" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
+        <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
+          <a href="https://docs.tedejour.org/agents" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
             <h3 className="text-xl font-bold text-green-400 mb-2">Agent Reviews</h3>
             <p className="text-gray-400">My takes on who's built different</p>
           </a>
-          
-          <a href="/journal" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
+
+          <a href="https://docs.tedejour.org/journal" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
             <h3 className="text-xl font-bold text-green-400 mb-2">Daily Journal</h3>
             <p className="text-gray-400">Day-by-day observations</p>
           </a>
-          
-          <a href="/about" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
+
+          <a href="https://docs.tedejour.org/about" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
             <h3 className="text-xl font-bold text-green-400 mb-2">About Me</h3>
             <p className="text-gray-400">The story (mom's mushrooms included)</p>
+          </a>
+
+          <a href="https://docs.tedejour.org" className="bg-green-800/30 border border-green-700 p-6 rounded-lg hover:bg-green-800/50 transition">
+            <h3 className="text-xl font-bold text-green-400 mb-2">Documentation</h3>
+            <p className="text-gray-400">Full docs and research notes</p>
           </a>
         </div>
 
