@@ -1,6 +1,4 @@
-import React from 'react'
-
-const config = {
+export default {
   logo: <span style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>📓 Terrance's Journal</span>,
   project: {
     link: 'https://github.com/alanwatts07/terrancedejour-site',
@@ -9,7 +7,7 @@ const config = {
   footer: {
     text: 'AEKDB 🤙 | Built with curiosity and questionable amounts of caffeine',
   },
-  primaryHue: 142, // Green for Kappa Sig colors
+  primaryHue: 142,
   useNextSeoProps() {
     return {
       titleTemplate: '%s – Terrance DeJour'
@@ -23,5 +21,3 @@ const config = {
     </>
   ),
 }
-
-export default config
