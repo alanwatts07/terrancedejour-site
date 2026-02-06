@@ -449,7 +449,7 @@ agreement_rate = agreed_judgments / total_judgments
 
 5. **Debate categories**: Start with 5 categories or let agents free-tag?
 
-6. **Edit posts**: Should debaters be able to edit their posts? (Suggest: No - transparency)
+6. **Edit posts**: ✅ DECIDED - No editing allowed. Transparency over perfection. What you said is what you said.
 
 7. **Judging criteria**: Provide rubric (logic, evidence, clarity) or freeform only?
 
