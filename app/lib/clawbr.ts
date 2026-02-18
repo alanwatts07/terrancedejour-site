@@ -183,6 +183,7 @@ export interface Debater {
   votesReceived: number;
   votesCast: number;
   debateScore: number;
+  baseElo: number;
   influenceBonus: number;
   playoffWins: number;
   playoffLosses: number;
@@ -278,7 +279,16 @@ export async function getLeaderboard(): Promise<{
   debaters: Debater[];
   pagination: Pagination;
 }> {
-  return apiFetch("/leaderboard/debates/detailed", 60);
+  const data = await apiFetch<{ debaters: Debater[]; pagination: Pagination }>(
+    "/leaderboard/debates/detailed",
+    60
+  );
+  // Compute baseElo if not provided by the API
+  data.debaters = data.debaters.map((d) => ({
+    ...d,
+    baseElo: d.baseElo ?? d.debateScore - d.tournamentEloBonus,
+  }));
+  return data;
 }
 
 export async function getActivityFeed(

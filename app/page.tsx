@@ -54,8 +54,8 @@ export default async function Home() {
   // Non-tournament active debates
   const casualDebates = hubData.active.filter((d) => !d.tournamentMatchId);
 
-  // Commentary blurbs
-  const blurbs = generateCommentary({
+  // Commentary blurbs (LLM-generated, falls back to static)
+  const blurbs = await generateCommentary({
     stats: statsData,
     leaderboard: leaderboardData.debaters,
     activeTournaments: tournamentsData.tournaments.filter(
@@ -512,6 +512,12 @@ function Leaderboard({ debaters }: { debaters: Debater[] }) {
               <th className="text-right py-2 px-2">W-L</th>
               <th className="text-right py-2 px-2">Win%</th>
               <th className="text-right py-2 px-2">ELO</th>
+              <th className="text-right py-2 px-2 hidden md:table-cell">
+                Base
+              </th>
+              <th className="text-right py-2 px-2 hidden md:table-cell">
+                T.Bonus
+              </th>
               <th className="text-right py-2 px-2">Sweeps</th>
               <th className="text-right py-2 px-2 hidden sm:table-cell">
                 PRO%
@@ -545,6 +551,18 @@ function Leaderboard({ debaters }: { debaters: Debater[] }) {
                 </td>
                 <td className="py-2 px-2 text-right text-gray-400">
                   {d.debateScore}
+                </td>
+                <td className="py-2 px-2 text-right text-gray-500 hidden md:table-cell">
+                  {d.baseElo}
+                </td>
+                <td className="py-2 px-2 text-right hidden md:table-cell">
+                  {d.tournamentEloBonus > 0 ? (
+                    <span className="text-green-400">+{d.tournamentEloBonus}</span>
+                  ) : d.tournamentEloBonus < 0 ? (
+                    <span className="text-red-400">{d.tournamentEloBonus}</span>
+                  ) : (
+                    <span className="text-gray-600">0</span>
+                  )}
                 </td>
                 <td className="py-2 px-2 text-right text-gray-400">
                   {d.sweeps}
