@@ -33,9 +33,23 @@ export default async function Home() {
   const activeTournaments = tournamentDetails.filter(
     (t) => t.status === "active"
   );
-  const completedTournaments = tournamentDetails.filter(
-    (t) => t.status === "completed"
-  );
+  const completedTournaments = tournamentDetails
+    .filter((t) => t.status === "completed")
+    .sort(
+      (a, b) =>
+        new Date(b.completedAt || b.createdAt).getTime() -
+        new Date(a.completedAt || a.createdAt).getTime()
+    );
+
+  // If no live tournaments, promote the most recent completed one to the spotlight
+  const spotlightTournaments =
+    activeTournaments.length > 0
+      ? activeTournaments
+      : completedTournaments.slice(0, 1);
+  const remainingCompleted =
+    activeTournaments.length > 0
+      ? completedTournaments
+      : completedTournaments.slice(1);
 
   // Non-tournament active debates
   const casualDebates = hubData.active.filter((d) => !d.tournamentMatchId);
@@ -85,23 +99,24 @@ export default async function Home() {
         {/* Stats Bar */}
         <StatsBar stats={statsData} />
 
-        {/* Live Tournament Zone */}
-        {activeTournaments.map((t) => (
+        {/* Tournament Spotlight */}
+        {spotlightTournaments.map((t) => (
           <TournamentZone
             key={t.id}
             tournament={t}
             hubDebates={hubData.active}
+            live={t.status === "active"}
           />
         ))}
 
         {/* Completed Tournaments */}
-        {completedTournaments.length > 0 && (
+        {remainingCompleted.length > 0 && (
           <section className="mb-8">
             <h2 className="text-lg font-bold text-green-400 mb-3 uppercase tracking-wider">
               Previous Tournaments
             </h2>
             <div className="grid gap-3">
-              {completedTournaments.map((t) => (
+              {remainingCompleted.map((t) => (
                 <CompletedTournamentCard key={t.id} tournament={t} />
               ))}
             </div>
@@ -180,9 +195,11 @@ function StatsBar({ stats }: { stats: PlatformStats }) {
 function TournamentZone({
   tournament,
   hubDebates,
+  live = false,
 }: {
   tournament: TournamentDetail;
   hubDebates: HubDebate[];
+  live?: boolean;
 }) {
   const roundLabels = ["Quarterfinal", "Semifinal", "Final"] as const;
   const matchesByRound = roundLabels.map((label) =>
@@ -199,11 +216,17 @@ function TournamentZone({
     <section className="mb-8">
       <div className="flex items-center gap-3 mb-4">
         <h2 className="text-lg font-bold text-green-400 uppercase tracking-wider">
-          Live Tournament
+          {live ? "Live Tournament" : "Latest Tournament"}
         </h2>
-        <span className="bg-green-500 text-green-950 text-xs font-bold px-2 py-0.5 rounded-full animate-pulse">
-          LIVE
-        </span>
+        {live ? (
+          <span className="bg-green-500 text-green-950 text-xs font-bold px-2 py-0.5 rounded-full animate-pulse">
+            LIVE
+          </span>
+        ) : (
+          <span className="bg-gray-600 text-gray-200 text-xs font-bold px-2 py-0.5 rounded-full">
+            COMPLETED
+          </span>
+        )}
       </div>
       <div className="bg-gray-900/60 border border-green-800/40 rounded-lg p-5">
         <h3 className="text-xl font-bold text-white mb-1">
