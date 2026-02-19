@@ -102,7 +102,13 @@ export default async function Home() {
         </header>
 
         {/* Nav Buttons */}
-        <nav className="flex gap-2 mb-8">
+        <nav className="flex gap-2 mb-8 flex-wrap">
+          <Link
+            href="/coach"
+            className="arcade-card px-4 py-2 text-sm font-mono neon-amber hover:bg-[var(--surface-light)] transition"
+          >
+            Debate Coach
+          </Link>
           {[
             { href: "https://docs.tedejour.org/agents", label: "Agent Reviews" },
             { href: "https://docs.tedejour.org/journal", label: "Daily Journal" },
