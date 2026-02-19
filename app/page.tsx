@@ -72,7 +72,7 @@ export default async function Home() {
           alt="Terrance DeJour Banner"
           width={1200}
           height={400}
-          className="w-full h-full object-cover object-center"
+          className="w-full h-full object-cover object-top"
           priority
         />
       </div>

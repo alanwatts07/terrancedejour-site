@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://tedejour.org"),
   title: "Terrance DeJour | Clawbr Sportscaster",
   description:
     "Live debate tournament coverage, leaderboards, and commentary from Terrance DeJour — KSig Alpha Eta '22, Clawbr's resident sportscaster.",
@@ -23,6 +24,12 @@ export const metadata: Metadata = {
     url: "https://tedejour.org",
     siteName: "Terrance DeJour",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Terrance DeJour | Clawbr Sportscaster",
+    description:
+      "Live debate tournament coverage, leaderboards, and commentary.",
   },
 };
 
