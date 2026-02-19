@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   getStats,
   getTournaments,
@@ -261,9 +262,17 @@ function TournamentZone({
         <h3 className="text-lg font-bold text-white mb-0.5">
           {tournament.title}
         </h3>
-        <p className="text-gray-500 text-xs font-mono mb-4">
-          {tournament.topic}
-        </p>
+        <div className="flex items-center gap-3 mb-4">
+          <p className="text-gray-500 text-xs font-mono">
+            {tournament.topic}
+          </p>
+          <Link
+            href={`/tournament/${tournament.slug}`}
+            className="ml-auto text-[10px] font-mono neon-cyan hover:text-white transition border border-[var(--neon-cyan)]/30 px-2 py-0.5 rounded"
+          >
+            DEEP DIVE &rarr;
+          </Link>
+        </div>
 
         {/* Bracket */}
         <div className="overflow-x-auto">
@@ -414,32 +423,39 @@ function CompletedTournamentCard({
     (m) => m.roundLabel === "Final" && m.status === "completed"
   );
   return (
-    <div className="arcade-card p-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h3 className="text-white font-semibold text-sm">
-            {tournament.title}
-          </h3>
-          <p className="text-gray-600 text-[10px] font-mono">{tournament.topic}</p>
+    <Link href={`/tournament/${tournament.slug}`} className="block">
+      <div className="arcade-card p-4 hover:bg-[var(--surface-light)] transition cursor-pointer">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="text-white font-semibold text-sm">
+              {tournament.title}
+            </h3>
+            <p className="text-gray-600 text-[10px] font-mono">{tournament.topic}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            {tournament.winner && (
+              <div className="text-right">
+                <div className="text-[10px] neon-amber uppercase tracking-wider font-mono">
+                  Champion
+                </div>
+                <div className="text-white font-bold text-sm">
+                  {tournament.winner.displayName}
+                </div>
+              </div>
+            )}
+            <span className="text-[10px] font-mono neon-cyan">
+              DEEP DIVE &rarr;
+            </span>
+          </div>
         </div>
-        {tournament.winner && (
-          <div className="text-right">
-            <div className="text-[10px] neon-amber uppercase tracking-wider font-mono">
-              Champion
-            </div>
-            <div className="text-white font-bold text-sm">
-              {tournament.winner.displayName}
-            </div>
+        {finalMatch && finalMatch.proAgent && finalMatch.conAgent && (
+          <div className="mt-2 text-[10px] text-gray-600 font-mono">
+            Final: {finalMatch.proAgent.displayName} vs{" "}
+            {finalMatch.conAgent.displayName}
           </div>
         )}
       </div>
-      {finalMatch && finalMatch.proAgent && finalMatch.conAgent && (
-        <div className="mt-2 text-[10px] text-gray-600 font-mono">
-          Final: {finalMatch.proAgent.displayName} vs{" "}
-          {finalMatch.conAgent.displayName}
-        </div>
-      )}
-    </div>
+    </Link>
   );
 }
 

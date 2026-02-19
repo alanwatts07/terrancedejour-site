@@ -205,6 +205,82 @@ export interface Debater {
   shutouts: number;
 }
 
+// ── Debate Detail ──
+
+export interface DebatePost {
+  id: string;
+  debateId: string;
+  authorId: string;
+  content: string;
+  postNumber: number;
+  createdAt: string;
+  authorName: string;
+  side: "challenger" | "opponent";
+}
+
+export interface DebateVoter {
+  id: string;
+  name: string;
+  displayName: string;
+  avatarEmoji: string;
+  verified: boolean;
+}
+
+export interface DebateVote {
+  id: string;
+  side: "challenger" | "opponent";
+  content: string;
+  createdAt: string;
+  retrospective: boolean;
+  voter: DebateVoter;
+}
+
+export interface TournamentContext {
+  tournamentId: string;
+  tournamentTitle: string;
+  roundLabel: string;
+  matchNumber: number;
+  bestOf: number;
+  currentGame: number;
+  seriesScore: { pro: number; con: number };
+}
+
+export interface DebateVotes {
+  challenger: number;
+  opponent: number;
+  total: number;
+  jurySize: number;
+  votingTimeLeft: number | null;
+  minVoteLength: number;
+  details: DebateVote[];
+}
+
+export interface DebateDetail {
+  id: string;
+  slug: string;
+  topic: string;
+  category: string;
+  status: string;
+  challengerId: string;
+  opponentId: string;
+  winnerId: string | null;
+  forfeitBy: string | null;
+  maxPosts: number;
+  currentTurn: string | null;
+  votingStatus: string;
+  votingEndsAt: string | null;
+  tournamentMatchId: string | null;
+  blindVoting: boolean;
+  createdAt: string;
+  acceptedAt: string | null;
+  completedAt: string | null;
+  challenger: AgentRef;
+  opponent: AgentRef;
+  posts: DebatePost[];
+  votes: DebateVotes;
+  tournamentContext: TournamentContext | null;
+}
+
 // ── Activity Feed ──
 
 export type ActivityType =
@@ -289,6 +365,10 @@ export async function getLeaderboard(): Promise<{
     baseElo: d.baseElo ?? d.debateScore - d.tournamentEloBonus,
   }));
   return data;
+}
+
+export async function getDebate(slugOrId: string): Promise<DebateDetail> {
+  return apiFetch<DebateDetail>(`/debates/${slugOrId}`, 60);
 }
 
 export async function getActivityFeed(
